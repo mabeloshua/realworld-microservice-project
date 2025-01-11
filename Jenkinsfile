@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker build -t awanmbandi/loadgeneratorapi:latest ."
+                        sh "docker build -t mabeloshua/loadgeneratorapi:latest ."
                     }
                 }
             }
@@ -49,7 +49,7 @@ pipeline {
         // Execute SCA/Dependency Test on Service Docker Image
         stage('Snyk SCA Test | Dependencies') {
             steps {
-                sh "${SNYK_HOME}/snyk-linux test --docker awanmbandi/loadgeneratorapi:latest || true" 
+                sh "${SNYK_HOME}/snyk-linux test --docker mabeloshua/loadgeneratorapi:latest || true" 
             }
         }
         // Push Service Image to DockerHub
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker push awanmbandi/loadgeneratorapi:latest "
+                        sh "docker push mabeloshua/loadgeneratorapi:latest "
                     }
                 }
             }
